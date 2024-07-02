@@ -13,7 +13,6 @@ public class CameraSwitch : MonoBehaviour
     private Quaternion targetRotation;
 
     public float transitionDuration = 1.0f;
-    private bool isTransitioning = false;
     private bool isSideView = false;
 
     private void Start()
@@ -26,18 +25,17 @@ public class CameraSwitch : MonoBehaviour
         targetOffset = Quaternion.Euler(0, -90, 0) * initialOffset;
         targetRotation = Quaternion.Euler(initialRotation.eulerAngles.x, initialRotation.eulerAngles.y - 90, initialRotation.eulerAngles.z);
     }
-
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isTransitioning)
-        {
-            SwitchPosition();
-        }
+        EventManager.OnSwitch += SwitchPosition;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnSwitch -= SwitchPosition;
     }
 
     void SwitchPosition()
     {
-        isTransitioning = true;
         StartCoroutine(TransitionCamera());
     }
 
@@ -66,7 +64,6 @@ public class CameraSwitch : MonoBehaviour
         cameraTransform.position = playerTransform.position + endOffset;
         cameraTransform.rotation = endRotation;
 
-        isTransitioning = false;
         isSideView = !isSideView;
     }
 }
