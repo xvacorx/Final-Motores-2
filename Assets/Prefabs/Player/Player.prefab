@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7623270070022243430}
   - component: {fileID: 3965372822178878277}
   - component: {fileID: 1095129874850993928}
+  - component: {fileID: 2398499739189823022}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -55,6 +56,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  isLateralView: 0
 --- !u!136 &7623270070022243430
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -118,6 +120,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileSize: 1
+--- !u!114 &2398499739189823022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641424892646704044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f9778e9dea39e4a875d2364f97c84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileManager: {fileID: 0}
 --- !u!1 &3481553154196536445
 GameObject:
   m_ObjectHideFlags: 0

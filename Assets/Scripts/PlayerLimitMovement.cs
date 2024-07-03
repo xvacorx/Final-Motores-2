@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerLimitMovement : MonoBehaviour
 {
-    public TileManager tileManager; // Referencia al TileManager
+    private TileManager tileManager; // Referencia al TileManager
 
     private PlayerMovement playerMovement;
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        tileManager = FindObjectOfType<TileManager>();
     }
 
     private void Update()
