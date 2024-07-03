@@ -24,11 +24,22 @@ public class CameraSwitch : MonoBehaviour
         // Define la posición y rotación objetivo
         targetOffset = Quaternion.Euler(0, -90, 0) * initialOffset;
         targetRotation = Quaternion.Euler(initialRotation.eulerAngles.x, initialRotation.eulerAngles.y - 90, initialRotation.eulerAngles.z);
+
+        // Asegúrate de que la cámara siga al jugador al inicio
+        UpdateCameraPosition();
     }
+
+    private void Update()
+    {
+        // Actualiza la posición de la cámara en cada frame
+        UpdateCameraPosition();
+    }
+
     private void OnEnable()
     {
         EventManager.OnSwitch += SwitchPosition;
     }
+
     private void OnDisable()
     {
         EventManager.OnSwitch -= SwitchPosition;
@@ -37,6 +48,12 @@ public class CameraSwitch : MonoBehaviour
     void SwitchPosition()
     {
         StartCoroutine(TransitionCamera());
+    }
+
+    void UpdateCameraPosition()
+    {
+        Vector3 offset = isSideView ? targetOffset : initialOffset;
+        cameraTransform.position = playerTransform.position + offset;
     }
 
     IEnumerator TransitionCamera()
@@ -65,5 +82,8 @@ public class CameraSwitch : MonoBehaviour
         cameraTransform.rotation = endRotation;
 
         isSideView = !isSideView;
+
+        // Actualiza la posición de la cámara después de la transición
+        UpdateCameraPosition();
     }
 }
