@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    public Transform[] tiles; // Array de tiles del mapa
+    public Transform[] tiles;
 
     private void Start()
     {
-        // Inicializar tiles con los hijos del GameObject actual
         tiles = GetComponentsInChildren<Transform>()
             .Where(t => t != transform) // Excluir el GameObject padre
             .ToArray();
@@ -20,7 +19,6 @@ public class TileManager : MonoBehaviour
 
         foreach (var tile in tiles)
         {
-            // Agregar a la lista de tiles si está en la misma línea que el jugador
             if (isFrontView)
             {
                 if (Mathf.Abs(tile.position.z - playerPosition.z) < 0.1f)
@@ -39,7 +37,6 @@ public class TileManager : MonoBehaviour
 
         if (lineTiles.Count == 0)
         {
-            // Retorna un rango inválido si no hay tiles en la misma línea
             return new Vector2(0, 0);
         }
 
