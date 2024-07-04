@@ -18,14 +18,14 @@ public class PlayerMovement : MonoBehaviour
     float move;
     Animator animator;
 
-    private float lastRotationY; // Nueva variable para guardar la última rotación en Y
+    private float lastRotationY;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         tilePositioning = GetComponent<TilePositioning>();
-        lastRotationY = transform.rotation.eulerAngles.y; // Inicializa con la rotación actual
+        lastRotationY = transform.rotation.eulerAngles.y;
     }
 
     void Update()
@@ -131,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
         float elapsedTime = 0f;
         Quaternion initialRotation = transform.rotation;
 
-        // Calcula la nueva rotación en Y basada en la vista actual y la dirección
         float targetYRotation = isLateralView ? -90f : 0f;
         if (lastRotationY == 180 || lastRotationY == 90)
         {
@@ -148,13 +147,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.rotation = targetRotation;
-        lastRotationY = transform.rotation.eulerAngles.y; // Actualiza la última rotación en Y
+        lastRotationY = transform.rotation.eulerAngles.y;
         isRotating = false;
     }
 
     void RotatePlayerInstant(float targetYRotation)
     {
         transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
-        lastRotationY = targetYRotation; // Actualiza la última rotación en Y
+        lastRotationY = targetYRotation;
     }
 }
