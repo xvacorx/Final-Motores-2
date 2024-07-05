@@ -73,7 +73,7 @@ public class CameraSwitch : MonoBehaviour
             cameraTransform.position = playerTransform.position + Vector3.Lerp(startOffset, endOffset, t);
             cameraTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 

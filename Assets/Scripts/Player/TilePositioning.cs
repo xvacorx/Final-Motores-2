@@ -20,7 +20,7 @@ public class TilePositioning : MonoBehaviour
         while (elapsedTime < moveDuration)
         {
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 

@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
 
     private float lastRotationY;
+    private Vector3 storedVelocity;
 
     void Start()
     {
@@ -33,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
         HandleMovement();
         HandleJump();
-        SwitchingBehaviour();
         Animations();
     }
 
@@ -102,11 +102,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void SwitchingBehaviour()
-    {
-        if (isRotating) { rb.velocity = Vector3.zero; }
-    }
-
     void SwitchView()
     {
         if (!isRotating)
@@ -118,14 +113,33 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator SwitchViewCoroutine()
     {
         isLateralView = !isLateralView;
+        Time.timeScale = 0f; // Pausar el tiempo
+
+        // Guardar la velocidad actual antes de la transición
+        storedVelocity = rb.velocity;
+
         Coroutine moveCoroutine = StartCoroutine(tilePositioning.PositionToNearestTileCenter(rotationDuration));
-        Coroutine rotateCoroutine = StartCoroutine(RotatePlayerSmooth());
+        Coroutine rotateCoroutine = StartCoroutine(RotatePlayerSmoothUnscaled());
 
         yield return moveCoroutine;
         yield return rotateCoroutine;
+
+        // Intercambiar la velocidad de los ejes X y Z después de la transición
+        if (isLateralView)
+        {
+            rb.velocity = new Vector3(0f, rb.velocity.y, storedVelocity.x);
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+        }
+        else
+        {
+            rb.velocity = new Vector3(storedVelocity.z, rb.velocity.y, 0f);
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        }
+
+        Time.timeScale = 1f; // Reanudar el tiempo
     }
 
-    IEnumerator RotatePlayerSmooth()
+    IEnumerator RotatePlayerSmoothUnscaled()
     {
         isRotating = true;
         float elapsedTime = 0f;
@@ -142,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         while (elapsedTime < rotationDuration)
         {
             transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / rotationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime; // Usar Time.unscaledDeltaTime para que la rotación no se vea afectada por la pausa
             yield return null;
         }
 
