@@ -9,14 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8903901792461534639}
+  - component: {fileID: 1132432442606597876}
   - component: {fileID: 6962037726924623473}
-  - component: {fileID: 3965372822178878277}
   - component: {fileID: 1095129874850993928}
   - component: {fileID: 2398499739189823022}
+  - component: {fileID: 3965372822178878277}
   - component: {fileID: 2027769581173744753}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,6 +39,20 @@ Transform:
   - {fileID: 1468084488783334807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132432442606597876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641424892646704044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b54d29448e2aa40a0101019d8cad1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 1
 --- !u!114 &6962037726924623473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,7 +71,34 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  doubleJumpEnabled: 0
   isLateralView: 0
+  jumpEffect: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+--- !u!114 &1095129874850993928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641424892646704044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5015fe77688a01048900cd01ebc698ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileSize: 1
+--- !u!114 &2398499739189823022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641424892646704044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f9778e9dea39e4a875d2364f97c84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &3965372822178878277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -84,31 +126,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!114 &1095129874850993928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641424892646704044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5015fe77688a01048900cd01ebc698ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileSize: 1
---- !u!114 &2398499739189823022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641424892646704044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f9778e9dea39e4a875d2364f97c84d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &2027769581173744753
 CapsuleCollider:
   m_ObjectHideFlags: 0

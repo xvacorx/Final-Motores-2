@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public bool doubleJumpEnabled = false;
+    bool doubleJump = true;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -14,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isRotating = false;
     private float rotationDuration = 1f;
     private TilePositioning tilePositioning;
+
+    [SerializeField] GameObject jumpEffect;
 
     float move;
     Animator animator;
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleJump();
         Animations();
+        if (Input.GetKeyDown(KeyCode.T)) { PlayerStats.Instance.LoseLife(5f); }
     }
 
     private void OnEnable()
@@ -98,8 +103,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
+            Destroy(jumpingEffect, 1f);
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }
+        if (Input.GetButtonDown("Jump") && doubleJump && !isGrounded && doubleJumpEnabled)
+        {
+            GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
+            Destroy(jumpingEffect, 1f);
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            doubleJump = false;
+        }
+        if (isGrounded) { doubleJump = true; }
     }
 
     void SwitchView()
@@ -113,9 +128,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator SwitchViewCoroutine()
     {
         isLateralView = !isLateralView;
-        Time.timeScale = 0f; // Pausar el tiempo
+        Time.timeScale = 0f;
 
-        // Guardar la velocidad actual antes de la transición
         storedVelocity = rb.velocity;
 
         Coroutine moveCoroutine = StartCoroutine(tilePositioning.PositionToNearestTileCenter(rotationDuration));
@@ -124,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
         yield return moveCoroutine;
         yield return rotateCoroutine;
 
-        // Intercambiar la velocidad de los ejes X y Z después de la transición
         if (isLateralView)
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, storedVelocity.x);
@@ -136,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
         }
 
-        Time.timeScale = 1f; // Reanudar el tiempo
+        Time.timeScale = 1f;
     }
 
     IEnumerator RotatePlayerSmoothUnscaled()
