@@ -45,4 +45,75 @@ public class TileManager : MonoBehaviour
 
         return new Vector2(min, max);
     }
+
+    public bool HasTileAhead(Vector3 currentPosition, bool isFrontView)
+    {
+        Vector3 checkPosition = currentPosition;
+
+        if (isFrontView)
+        {
+            checkPosition.x += 1f;
+        }
+        else
+        {
+            checkPosition.z += 1f;
+        }
+
+        foreach (var tile in tiles)
+        {
+            if (isFrontView)
+            {
+                if (Mathf.Abs(tile.position.z - checkPosition.z) < 0.1f &&
+                    Mathf.Abs(tile.position.x - checkPosition.x) < 0.1f)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(tile.position.x - checkPosition.x) < 0.1f &&
+                    Mathf.Abs(tile.position.z - checkPosition.z) < 0.1f)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    public bool HasTileBackwards(Vector3 currentPosition, bool isFrontView)
+    {
+        Vector3 checkPosition = currentPosition;
+
+        if (isFrontView)
+        {
+            checkPosition.x -= 1f;
+        }
+        else
+        {
+            checkPosition.z -= 1f;
+        }
+
+        foreach (var tile in tiles)
+        {
+            if (isFrontView)
+            {
+                if (Mathf.Abs(tile.position.z - checkPosition.z) < 0.1f &&
+                    Mathf.Abs(tile.position.x - checkPosition.x) < 0.1f)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(tile.position.x - checkPosition.x) < 0.1f &&
+                    Mathf.Abs(tile.position.z - checkPosition.z) < 0.1f)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

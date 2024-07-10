@@ -51,7 +51,15 @@ public class PlayerMovement : MonoBehaviour
     {
         EventManager.OnSwitch -= SwitchView;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
+            Destroy(jumpingEffect, 1f);
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        }
+    }
     void Animations()
     {
         if (isGrounded && move != 0 && !isRotating)
@@ -103,8 +111,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
-            Destroy(jumpingEffect, 1f);
+            //GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
+            //Destroy(jumpingEffect, 1f);
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }
         if (Input.GetButtonDown("Jump") && doubleJump && !isGrounded && doubleJumpEnabled)
