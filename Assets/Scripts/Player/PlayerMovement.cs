@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleJump();
         Animations();
-        if (Input.GetKeyDown(KeyCode.T)) { PlayerStats.Instance.LoseLife(5f); }
     }
 
     private void OnEnable()
@@ -78,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovement()
     {
         move = Input.GetAxis("Horizontal") * moveSpeed;
-
+       
         if (isLateralView)
         {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, move);
@@ -104,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 RotatePlayerInstant(180);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            animator.SetTrigger("damage");
         }
     }
 
