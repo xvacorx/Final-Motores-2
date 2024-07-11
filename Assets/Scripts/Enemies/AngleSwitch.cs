@@ -5,7 +5,7 @@ using UnityEngine;
 public class AngleSwitch : MonoBehaviour
 {
     bool isRotating = false;
-    bool isLateralView = false;
+    public bool isLateralView = false;
     Vector3 storedVelocity;
     float lastRotationY;
     Rigidbody rb;

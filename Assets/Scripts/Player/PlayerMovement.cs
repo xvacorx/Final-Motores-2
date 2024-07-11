@@ -23,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
 
     private float lastRotationY;
-    private Vector3 storedVelocity;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -77,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovement()
     {
         move = Input.GetAxis("Horizontal") * moveSpeed;
-       
         if (isLateralView)
         {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, move);
@@ -115,8 +112,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            //GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
-            //Destroy(jumpingEffect, 1f);
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         }
         if (Input.GetButtonDown("Jump") && doubleJump && !isGrounded && doubleJumpEnabled)
@@ -142,8 +137,6 @@ public class PlayerMovement : MonoBehaviour
         isLateralView = !isLateralView;
         Time.timeScale = 0f;
 
-        storedVelocity = rb.velocity;
-
         Coroutine moveCoroutine = StartCoroutine(tilePositioning.PositionToNearestTileCenter(rotationDuration));
         Coroutine rotateCoroutine = StartCoroutine(RotatePlayerSmoothUnscaled());
 
@@ -152,12 +145,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isLateralView)
         {
-            rb.velocity = new Vector3(0f, rb.velocity.y, storedVelocity.x);
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
         }
         else
         {
-            rb.velocity = new Vector3(storedVelocity.z, rb.velocity.y, 0f);
             rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
         }
 

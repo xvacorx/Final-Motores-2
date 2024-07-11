@@ -81,6 +81,7 @@ public class TileManager : MonoBehaviour
 
         return false;
     }
+
     public bool HasTileBackwards(Vector3 currentPosition, bool isFrontView)
     {
         Vector3 checkPosition = currentPosition;
@@ -115,5 +116,33 @@ public class TileManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool HasMoreTilesAhead(Vector3 currentPosition, bool isFrontView)
+    {
+        Vector2 bounds = GetLineBounds(currentPosition, isFrontView);
+
+        if (isFrontView)
+        {
+            return currentPosition.x < bounds.y;
+        }
+        else
+        {
+            return currentPosition.z < bounds.y;
+        }
+    }
+
+    public bool HasMoreTilesBackwards(Vector3 currentPosition, bool isFrontView)
+    {
+        Vector2 bounds = GetLineBounds(currentPosition, isFrontView);
+
+        if (isFrontView)
+        {
+            return currentPosition.x > bounds.x;
+        }
+        else
+        {
+            return currentPosition.z > bounds.x;
+        }
     }
 }

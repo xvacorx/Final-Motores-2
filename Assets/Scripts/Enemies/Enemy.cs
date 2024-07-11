@@ -24,8 +24,11 @@ public abstract class Enemy : MonoBehaviour
     }
     public virtual void Die()
     {
-        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 1f);
+        if (deathEffect != null)
+        {
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 1f);
+        }
         Destroy(gameObject);
     }
 }
