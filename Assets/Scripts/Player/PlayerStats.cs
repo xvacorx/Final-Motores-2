@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance { get; private set; }
 
     Animator animator;
+    PlayerMovement movement;
 
     [SerializeField] float health;
     [SerializeField] float damage;
@@ -25,7 +26,12 @@ public class PlayerStats : MonoBehaviour
     }
     private void Start()
     {
+        movement = GetComponent<PlayerMovement>();
         animator = GetComponentInChildren<Animator>();
+    }
+    public void JumpOnKill()
+    {
+        movement.JumpAboveEnemy();
     }
     public void LoseLife(float amount)
     {

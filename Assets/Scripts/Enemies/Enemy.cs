@@ -7,6 +7,8 @@ public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject deathEffect;
     public float health;
+    [SerializeField] bool hurting;
+    [SerializeField] float damage;
     public virtual void LoseLife(float amount)
     {
         health -= amount;
@@ -18,8 +20,16 @@ public abstract class Enemy : MonoBehaviour
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        { 
-            LoseLife(1f);
+        {
+            if (hurting)
+            {
+                PlayerStats.Instance.LoseLife(damage);
+            }
+            else
+            {
+                PlayerStats.Instance.JumpOnKill();
+                LoseLife(1f);
+            }
         }
     }
     public virtual void Die()

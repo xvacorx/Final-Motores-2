@@ -48,14 +48,11 @@ public class PlayerMovement : MonoBehaviour
     {
         EventManager.OnSwitch -= SwitchView;
     }
-    private void OnTriggerEnter(Collider other)
+    public void JumpAboveEnemy()
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
-            Destroy(jumpingEffect, 1f);
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-        }
+        GameObject jumpingEffect = Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z), Quaternion.identity);
+        Destroy(jumpingEffect, 1f);
+        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     }
     void Animations()
     {
@@ -100,11 +97,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 RotatePlayerInstant(180);
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            animator.SetTrigger("damage");
         }
     }
 
@@ -154,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
 
         Time.timeScale = 1f;
     }
-
     IEnumerator RotatePlayerSmoothUnscaled()
     {
         isRotating = true;

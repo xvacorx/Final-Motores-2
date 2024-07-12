@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2816234912960751572}
   - component: {fileID: 7145867624223819781}
   - component: {fileID: 2805559725969585930}
-  - component: {fileID: 1001371270580815025}
   - component: {fileID: 4866966842617854583}
   - component: {fileID: 7159186884686436009}
   - component: {fileID: 6487869900483199518}
@@ -52,8 +51,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 0}
-  health: 0
-  speed: 2
+  health: 1
+  hurting: 1
+  damage: 10
+  speed: 1.5
   sprite: {fileID: 7112830670427981950}
   canMoveForw: 0
   canMoveBack: 0
@@ -72,33 +73,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.35}
-  m_Center: {x: -0.045, y: -0.05, z: 0}
---- !u!65 &1001371270580815025
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4936007032913398071}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.030000001, z: 0.3}
-  m_Center: {x: -0.045, y: 0.11, z: 0}
+  m_Size: {x: 0.3, y: 0.27945688, z: 0.35}
+  m_Center: {x: -0.045, y: -0.039728418, z: 0}
 --- !u!114 &4866966842617854583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +145,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
