@@ -1,25 +1,46 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SlimeEnemy : Enemy
 {
     public Transform firePoint;
     public float rayDistance = 10f;
+    public GameObject projectilePrefab;
+    public float fireRate = 3f; 
 
     Transform player;
     AngleSwitch angleSwitch;
+    private bool canFire = true;
+
     private void Start()
     {
         player = GameObject.Find("Player").transform;
         angleSwitch = GetComponent<AngleSwitch>();
+        StartCoroutine(FireProjectile());
     }
+
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector2.left, rayDistance);
-        if (hit.collider.CompareTag("Player"))
+        Vector2 direction = Vector2.left;
+        if (angleSwitch.isLateralView)
         {
-            Debug.Log("Hit: " + hit.collider.name);
+            direction = Vector2.left;
+        }
+        else
+        {
+            direction = Vector2.left;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, rayDistance);
+
+        Debug.Log("Raycast Hit: " + hit.collider.tag);
+
+        if (hit.collider != null && hit.collider.CompareTag("Player"))
+        {
+            if (canFire)
+            {
+                StartCoroutine(FireProjectile());
+            }
         }
 
         if (angleSwitch.isLateralView)
@@ -59,12 +80,12 @@ public class SlimeEnemy : Enemy
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
     }
-    void OnDrawGizmos()
+
+    IEnumerator FireProjectile()
     {
-        if (firePoint != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(firePoint.position, firePoint.position + Vector3.right * rayDistance);
-        }
+        canFire = false;
+        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
     }
 }

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5850424127449936918}
   - component: {fileID: 7802416216044043984}
   - component: {fileID: 8495563609689449273}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,9 +115,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463792556284078963}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,9 +152,9 @@ GameObject:
   - component: {fileID: 4690421331236898942}
   - component: {fileID: 9186690182578837283}
   - component: {fileID: 2396981566030143350}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +193,10 @@ MonoBehaviour:
   hurting: 0
   damage: 5
   firePoint: {fileID: 8463792556284078963}
-  rayDistance: 10
+  rayDistance: 4
+  projectilePrefab: {fileID: 8920054247373260475, guid: 744e5977fd46a7d4293daf449e52c8c8,
+    type: 3}
+  fireRate: 3
 --- !u!114 &-5289864714397491580
 MonoBehaviour:
   m_ObjectHideFlags: 0
