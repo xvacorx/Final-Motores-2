@@ -25,6 +25,5 @@ public class UIManager : MonoBehaviour
     {
         totalCollectibles = GameObject.FindGameObjectsWithTag("Collectible").Length;
         collectibleText.text = "Collectibles: " + totalCollectibles;
-        if (totalCollectibles <= 0) { SceneManager.LoadScene("GameOver"); }
     }
 }
