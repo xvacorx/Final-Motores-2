@@ -72,13 +72,15 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovement()
     {
         move = Input.GetAxis("Horizontal") * moveSpeed;
+        Vector3 targetPosition = transform.position;
+
         if (isLateralView)
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, move);
+            targetPosition += Vector3.forward * move * Time.deltaTime;
 
             if (move > 0 && Mathf.Abs(transform.rotation.eulerAngles.y) != 270)
             {
-                RotatePlayerInstant(-90);
+                RotatePlayerInstant(270);
             }
             else if (move < 0 && Mathf.Abs(transform.rotation.eulerAngles.y) != 90)
             {
@@ -87,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector3(move, rb.velocity.y, rb.velocity.z);
+            targetPosition += Vector3.right * move * Time.deltaTime;
 
             if (move > 0 && Mathf.Abs(transform.rotation.eulerAngles.y) != 0)
             {
@@ -98,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
                 RotatePlayerInstant(180);
             }
         }
+
+        rb.MovePosition(targetPosition);
     }
 
     void HandleJump()
