@@ -32,7 +32,7 @@ public class ClearVision : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(checkInterval); // Usa WaitForSecondsRealtime para ignorar el timescale
+            yield return new WaitForSecondsRealtime(checkInterval);
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, triggerRadius);
             HashSet<MeshRenderer> currentRenderers = new HashSet<MeshRenderer>();
