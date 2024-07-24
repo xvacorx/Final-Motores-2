@@ -7,8 +7,21 @@ public class ClearVision : MonoBehaviour
     public float checkInterval = 0.1f;
     public float triggerRadius = 5f;
     public Color gizmoColor = Color.red;
+    public Material invisibleMaterial;
 
-    private List<MeshRenderer> hiddenRenderers = new List<MeshRenderer>();
+    private List<RendererData> hiddenRenderers = new List<RendererData>();
+
+    private class RendererData
+    {
+        public MeshRenderer renderer;
+        public Material[] originalMaterials;
+
+        public RendererData(MeshRenderer renderer)
+        {
+            this.renderer = renderer;
+            this.originalMaterials = renderer.sharedMaterials;
+        }
+    }
 
     private void Start()
     {
@@ -29,26 +42,34 @@ public class ClearVision : MonoBehaviour
                 if (collider.gameObject.TryGetComponent<MeshRenderer>(out MeshRenderer render))
                 {
                     currentRenderers.Add(render);
-                    if (!hiddenRenderers.Contains(render))
+                    if (!hiddenRenderers.Exists(data => data.renderer == render))
                     {
-                        render.enabled = false;
-                        hiddenRenderers.Add(render);
+                        RendererData rendererData = new RendererData(render);
+                        hiddenRenderers.Add(rendererData);
+
+                        Material[] invisibleMaterials = new Material[render.sharedMaterials.Length];
+                        for (int i = 0; i < invisibleMaterials.Length; i++)
+                        {
+                            invisibleMaterials[i] = invisibleMaterial;
+                        }
+                        render.sharedMaterials = invisibleMaterials;
                     }
                 }
             }
 
             // Reactivar renderers que ya no están en el área
-            hiddenRenderers.RemoveAll(renderer =>
+            hiddenRenderers.RemoveAll(data =>
             {
-                if (!currentRenderers.Contains(renderer))
+                if (!currentRenderers.Contains(data.renderer))
                 {
-                    renderer.enabled = true;
+                    data.renderer.sharedMaterials = data.originalMaterials;
                     return true;
                 }
                 return false;
             });
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;
