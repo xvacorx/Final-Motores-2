@@ -30,11 +30,13 @@ public class PlayerMovement : MonoBehaviour
         tilePositioning = GetComponent<TilePositioning>();
         lastRotationY = transform.rotation.eulerAngles.y;
     }
-
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
-        HandleMovement();
         HandleJump();
         Animations();
     }
