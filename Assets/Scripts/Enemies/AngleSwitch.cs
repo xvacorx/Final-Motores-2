@@ -12,6 +12,7 @@ public class AngleSwitch : MonoBehaviour
     TilePositioning tilePositioning;
     TileManager tileManager;
 
+    [SerializeField] bool autoAddConstraints;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,18 +51,19 @@ public class AngleSwitch : MonoBehaviour
 
         Coroutine moveCoroutine = StartCoroutine(tilePositioning.PositionToNearestTileCenter(1f));
         Coroutine rotateCoroutine = StartCoroutine(RotatePlayerSmoothUnscaled());
-
-        if (isLateralView)
+        if (autoAddConstraints)
         {
-            rb.velocity = new Vector3(0f, rb.velocity.y, storedVelocity.x);
-            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+            if (isLateralView)
+            {
+                rb.velocity = new Vector3(0f, rb.velocity.y, storedVelocity.x);
+                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
+            }
+            else
+            {
+                rb.velocity = new Vector3(storedVelocity.z, rb.velocity.y, 0f);
+                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+            }
         }
-        else
-        {
-            rb.velocity = new Vector3(storedVelocity.z, rb.velocity.y, 0f);
-            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-        }
-
         yield return moveCoroutine;
         yield return rotateCoroutine;
     }

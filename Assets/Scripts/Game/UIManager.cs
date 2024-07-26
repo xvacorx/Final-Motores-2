@@ -10,20 +10,28 @@ public class UIManager : MonoBehaviour
     private int totalCollectibles;
     private void OnEnable()
     {
-        EventManager.CollectedCoin += UpdateCollectibleCount;
+        EventManager.CollectedCoin += DiscountCollectibleCount;
     }
     private void OnDisable()
     {
-        EventManager.CollectedCoin -= UpdateCollectibleCount;
+        EventManager.CollectedCoin -= DiscountCollectibleCount;
     }
     void Start()
     {
+        FindCollectibles();
         UpdateCollectibleCount();
     }
-
-    void UpdateCollectibleCount()
+    void FindCollectibles()
     {
         totalCollectibles = GameObject.FindGameObjectsWithTag("Collectible").Length;
+    }
+    void UpdateCollectibleCount()
+    {
         collectibleText.text = "Collectibles: " + totalCollectibles;
+    }
+    void DiscountCollectibleCount()
+    {
+        totalCollectibles -= 1;
+        UpdateCollectibleCount();
     }
 }

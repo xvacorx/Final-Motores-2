@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7415948285631634139}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -159,6 +159,8 @@ MonoBehaviour:
   deathEffect: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47,
     type: 3}
   health: 1
+  hurting: 0
+  damage: 0
 --- !u!54 &5436237800522308780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -184,7 +186,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 122
   m_CollisionDetection: 1
 --- !u!114 &8122008580212893605
 MonoBehaviour:
@@ -198,6 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4c2e04061acfd43af08e03ddfd190d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLateralView: 0
+  autoAddConstraints: 0
 --- !u!114 &5706669698587134948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,8 +234,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.2, z: 0.25}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3885585, y: 0.2668993, z: 0.25}
+  m_Center: {x: -0.0070846677, y: -0.03344965, z: 0}
 --- !u!65 &2030662018517219213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -251,5 +255,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.025, z: 0.2}
+  m_Size: {x: 0.275, y: 0.025, z: 0.2}
   m_Center: {x: 0, y: 0.1, z: 0}
