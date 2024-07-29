@@ -8,6 +8,7 @@ TagManager:
   - HurtingEnemy
   - FxTemporaire
   - Collectible
+  - Trap
   layers:
   - Default
   - TransparentFX

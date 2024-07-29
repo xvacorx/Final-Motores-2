@@ -17,6 +17,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         cameraTransform = transform;
         initialOffset = cameraTransform.position - playerTransform.position;
         initialRotation = cameraTransform.rotation;

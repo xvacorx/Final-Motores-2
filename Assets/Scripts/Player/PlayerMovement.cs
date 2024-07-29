@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private float lastRotationY;
     void Start()
     {
+        groundCheck = transform.Find("Foot").gameObject.transform;
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         tilePositioning = GetComponent<TilePositioning>();

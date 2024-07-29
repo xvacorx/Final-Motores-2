@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Jobs;
+using UnityEngine.UIElements;
 
 public class PlayerLimitMovement : MonoBehaviour
 {
@@ -8,8 +10,9 @@ public class PlayerLimitMovement : MonoBehaviour
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
         tileManager = FindObjectOfType<TileManager>();
+        playerMovement = GetComponent<PlayerMovement>();
+        transform.position = new Vector3(0f, 0.5f, 0f);
     }
 
     private void Update()
@@ -18,6 +21,7 @@ public class PlayerLimitMovement : MonoBehaviour
         Vector3 position = transform.position;
 
         Vector2 lineBounds = tileManager.GetLineBounds(position, isFrontView);
+
 
         if (isFrontView)
         {
