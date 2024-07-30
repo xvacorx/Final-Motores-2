@@ -7,7 +7,7 @@ public class SlimeEnemy : Enemy
     public GameObject projectilePrefab;
     public float fireRate = 3f;
     public float fireDelay = 0.1f;
-    public float detectionRange = 10f; 
+    public float detectionRange = 10f;
 
     Transform player;
     AngleSwitch angleSwitch;
@@ -24,20 +24,29 @@ public class SlimeEnemy : Enemy
 
     void Update()
     {
-        if (player != null && Vector3.Distance(transform.position, player.position) <= detectionRange)
+        if (player != null)
         {
-            if (canFire)
-            {
-                StartCoroutine(FireProjectile());
-            }
-
             if (angleSwitch.isLateralView)
             {
                 LookAtPlayerLateral();
+                if (IsPlayerInRangeAndInFrontLateral())
+                {
+                    if (canFire)
+                    {
+                        StartCoroutine(FireProjectile());
+                    }
+                }
             }
             else
             {
                 LookAtPlayerFrontal();
+                if (IsPlayerInRangeAndInFrontFrontal())
+                {
+                    if (canFire)
+                    {
+                        StartCoroutine(FireProjectile());
+                    }
+                }
             }
         }
     }
@@ -70,6 +79,30 @@ public class SlimeEnemy : Enemy
         }
     }
 
+    bool IsPlayerInRangeAndInFrontLateral()
+    {
+        float distance = Mathf.Abs(transform.position.z - player.position.z);
+        bool isPlayerInRange = distance <= detectionRange;
+
+        Vector3 directionToPlayer = player.position - transform.position;
+        directionToPlayer.y = 0;
+        float dotProduct = Vector3.Dot(-transform.right, directionToPlayer.normalized);
+
+        return isPlayerInRange && dotProduct > 0.5f;
+    }
+
+    bool IsPlayerInRangeAndInFrontFrontal()
+    {
+        float distance = Mathf.Abs(transform.position.x - player.position.x);
+        bool isPlayerInRange = distance <= detectionRange;
+
+        Vector3 directionToPlayer = player.position - transform.position;
+        directionToPlayer.y = 0;
+        float dotProduct = Vector3.Dot(-transform.right, directionToPlayer.normalized);
+
+        return isPlayerInRange && dotProduct > 0.5f;
+    }
+
     IEnumerator FireProjectile()
     {
         animator.SetTrigger("shoot");
@@ -79,6 +112,7 @@ public class SlimeEnemy : Enemy
         yield return new WaitForSeconds(fireRate - fireDelay);
         canFire = true;
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

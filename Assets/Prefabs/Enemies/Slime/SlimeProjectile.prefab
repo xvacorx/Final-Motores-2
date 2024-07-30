@@ -52,7 +52,8 @@ MonoBehaviour:
   lifetime: 10
   damage: 5
   speed: 3
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 763799897560185588, guid: 798157bad7358b04499c9d71cd3c0d9b,
+    type: 3}
 --- !u!33 &343886855850980728
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -159,55 +160,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3828918288777718330}
     m_Modifications:
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time
-      value: 0.022304535
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
-      value: 0.27358246
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
-      value: -0.2798238
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
-      value: -0.2798238
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
-      value: -0.2798238
-      objectReference: {fileID: 0}
-    - target: {fileID: 763799897560185547, guid: 798157bad7358b04499c9d71cd3c0d9b,
-        type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
-      value: -0.2798238
-      objectReference: {fileID: 0}
     - target: {fileID: 763799897560185588, guid: 798157bad7358b04499c9d71cd3c0d9b,
         type: 3}
       propertyPath: m_Name
       value: CFXR2 Sparks Rain
+      objectReference: {fileID: 0}
+    - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
         type: 3}
@@ -257,6 +228,11 @@ PrefabInstance:
     - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 763799897560185589, guid: 798157bad7358b04499c9d71cd3c0d9b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
