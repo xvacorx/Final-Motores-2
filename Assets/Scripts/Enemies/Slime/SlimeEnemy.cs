@@ -29,24 +29,30 @@ public class SlimeEnemy : Enemy
             if (angleSwitch.isLateralView)
             {
                 LookAtPlayerLateral();
-                if (IsPlayerInRangeAndInFrontLateral())
+
+                if (Mathf.Abs(transform.position.x - player.position.x) == 0f)
                 {
-                    if (canFire)
+
+                    if (IsPlayerInRangeAndInFrontLateral())
                     {
-                        StartCoroutine(FireProjectile());
+                        if (canFire)
+                        {
+                            StartCoroutine(FireProjectile());
+                        }
                     }
                 }
             }
             else
             {
                 LookAtPlayerFrontal();
-                if (IsPlayerInRangeAndInFrontFrontal())
-                {
-                    if (canFire)
+                if (Mathf.Abs(transform.position.z - player.position.z) == 0f)
+                    if (IsPlayerInRangeAndInFrontFrontal())
                     {
-                        StartCoroutine(FireProjectile());
+                        if (canFire)
+                        {
+                            StartCoroutine(FireProjectile());
+                        }
                     }
-                }
             }
         }
     }

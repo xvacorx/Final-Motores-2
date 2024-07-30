@@ -145,4 +145,41 @@ public class TileManager : MonoBehaviour
             return currentPosition.z > bounds.x;
         }
     }
+
+    public List<Vector2> GetGaps(Vector3 playerPosition, bool isFrontView, int gapSize = 3)
+    {
+        List<float> lineTiles = new List<float>();
+
+        foreach (var tile in tiles)
+        {
+            if (isFrontView)
+            {
+                if (Mathf.Abs(tile.position.z - playerPosition.z) < 0.1f)
+                {
+                    lineTiles.Add(tile.position.x);
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(tile.position.x - playerPosition.x) < 0.1f)
+                {
+                    lineTiles.Add(tile.position.z);
+                }
+            }
+        }
+
+        lineTiles.Sort();
+
+        List<Vector2> gaps = new List<Vector2>();
+
+        for (int i = 0; i < lineTiles.Count - 1; i++)
+        {
+            if (lineTiles[i + 1] - lineTiles[i] > gapSize)
+            {
+                gaps.Add(new Vector2(lineTiles[i], lineTiles[i + 1]));
+            }
+        }
+
+        return gaps;
+    }
 }

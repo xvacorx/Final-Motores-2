@@ -197,6 +197,7 @@ MonoBehaviour:
     type: 3}
   fireRate: 3
   fireDelay: 0.3
+  detectionRange: 3
 --- !u!114 &-5289864714397491580
 MonoBehaviour:
   m_ObjectHideFlags: 0

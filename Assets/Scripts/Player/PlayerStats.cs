@@ -38,6 +38,7 @@ public class PlayerStats : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
+            movement.enabled = false;
             Debug.Log("Player Death");
             animator.SetTrigger("death");
             Destroy(gameObject, 0.5f);
