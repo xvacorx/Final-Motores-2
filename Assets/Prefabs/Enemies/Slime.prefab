@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 2386469659218280139}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 115d087f93159964ca9ec61956e8336e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 13092fc04b0767d4fb1cddea3b16a88f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -193,10 +193,10 @@ MonoBehaviour:
   hurting: 0
   damage: 5
   firePoint: {fileID: 8463792556284078963}
-  rayDistance: 4
   projectilePrefab: {fileID: 8920054247373260475, guid: 744e5977fd46a7d4293daf449e52c8c8,
     type: 3}
   fireRate: 3
+  fireDelay: 0.3
 --- !u!114 &-5289864714397491580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLateralView: 0
+  autoAddConstraints: 0
 --- !u!65 &4690421331236898942
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,52 +4,41 @@ using UnityEngine;
 public class SlimeEnemy : Enemy
 {
     public Transform firePoint;
-    public float rayDistance = 10f;
     public GameObject projectilePrefab;
-    public float fireRate = 3f; 
+    public float fireRate = 3f;
+    public float fireDelay = 0.1f;
+    public float detectionRange = 10f; 
 
     Transform player;
     AngleSwitch angleSwitch;
-    private bool canFire = true;
+    bool canFire = true;
+
+    Animator animator;
 
     private void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player")?.transform;
         angleSwitch = GetComponent<AngleSwitch>();
-        StartCoroutine(FireProjectile());
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
-        Vector2 direction = Vector2.left;
-        if (angleSwitch.isLateralView)
-        {
-            direction = Vector2.left;
-        }
-        else
-        {
-            direction = Vector2.left;
-        }
-
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, rayDistance);
-
-        Debug.Log("Raycast Hit: " + hit.collider.tag);
-
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
+        if (player != null && Vector3.Distance(transform.position, player.position) <= detectionRange)
         {
             if (canFire)
             {
                 StartCoroutine(FireProjectile());
             }
-        }
 
-        if (angleSwitch.isLateralView)
-        {
-            LookAtPlayerLateral();
-        }
-        else
-        {
-            LookAtPlayerFrontal();
+            if (angleSwitch.isLateralView)
+            {
+                LookAtPlayerLateral();
+            }
+            else
+            {
+                LookAtPlayerFrontal();
+            }
         }
     }
 
@@ -83,9 +72,16 @@ public class SlimeEnemy : Enemy
 
     IEnumerator FireProjectile()
     {
+        animator.SetTrigger("shoot");
         canFire = false;
+        yield return new WaitForSeconds(fireDelay);
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate - fireDelay);
         canFire = true;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

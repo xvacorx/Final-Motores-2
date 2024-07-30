@@ -8,6 +8,8 @@ public static class EventManager
     private static float lastSwitchTime = 0f;
 
     public static event Action CollectedCoin;
+
+    public static event Action PlayerDeath;
     public static void CoinCollect()
     {
         CollectedCoin?.Invoke();
@@ -19,5 +21,9 @@ public static class EventManager
             OnSwitch?.Invoke();
             lastSwitchTime = Time.time;
         }
+    }
+    public static void TriggerPlayerDeath()
+    {
+        PlayerDeath?.Invoke();
     }
 }

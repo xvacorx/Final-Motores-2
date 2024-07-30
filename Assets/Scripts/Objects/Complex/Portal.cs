@@ -5,7 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public Transform portalDestination;
-
+    [SerializeField] bool triggerSwitch;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -18,6 +18,7 @@ public class Portal : MonoBehaviour
             {
                 Debug.LogWarning("Portal destination is not set!");
             }
+            if (triggerSwitch) { EventManager.TriggerSwitch(); }
         }
     }
 
