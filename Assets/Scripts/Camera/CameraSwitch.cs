@@ -32,8 +32,10 @@ public class CameraSwitch : MonoBehaviour
 
     private void Update()
     {
-        // Actualiza la posición de la cámara en cada frame
-        UpdateCameraPosition();
+        if (playerTransform != null)
+        {
+            UpdateCameraPosition();
+        }
     }
 
     private void OnEnable()

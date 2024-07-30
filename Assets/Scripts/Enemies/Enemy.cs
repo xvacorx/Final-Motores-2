@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] GameObject deathEffect;
     public float health;
     [SerializeField] bool hurting;
-    [SerializeField] float damage;
+    public float damage;
     public virtual void LoseLife(float amount)
     {
         health -= amount;

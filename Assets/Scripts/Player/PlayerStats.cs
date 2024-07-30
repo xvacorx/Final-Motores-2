@@ -10,14 +10,13 @@ public class PlayerStats : MonoBehaviour
     Animator animator;
     PlayerMovement movement;
 
-    [SerializeField] float health;
-    [SerializeField] float damage;
+    public float health;
+    public float damage;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -40,7 +39,8 @@ public class PlayerStats : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Player Death");
-            Destroy(gameObject);
+            animator.SetTrigger("death");
+            Destroy(gameObject, 0.5f);
         }
     }
 }

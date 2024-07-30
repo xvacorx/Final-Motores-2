@@ -6,10 +6,28 @@ public class Portal : MonoBehaviour
 {
     public Transform portalDestination;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player")){
-            
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (portalDestination != null)
+            {
+                other.gameObject.transform.position = portalDestination.position;
+            }
+            else
+            {
+                Debug.LogWarning("Portal destination is not set!");
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (portalDestination != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, portalDestination.position);
+            Gizmos.DrawSphere(portalDestination.position, 0.2f);
         }
     }
 }
