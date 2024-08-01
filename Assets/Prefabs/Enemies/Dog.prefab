@@ -55,6 +55,10 @@ MonoBehaviour:
   hurting: 1
   damage: 10
   speed: 1.5
+  raycastLength: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
   sprite: {fileID: 7112830670427981950}
   canMoveForw: 0
   canMoveBack: 0
@@ -77,8 +81,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.36056277, y: 0.36020705, z: 0.35}
-  m_Center: {x: -0.07528137, y: -0.0801035, z: 0}
+  m_Size: {x: 0.36056277, y: 0.36515585, z: 0.35}
+  m_Center: {x: -0.07528137, y: -0.0825779, z: 0}
 --- !u!114 &4866966842617854583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +157,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.16
-  m_Height: 0.2
+  m_Height: 0.37905368
   m_Direction: 1
-  m_Center: {x: -0.05, y: -0.05, z: 0}
+  m_Center: {x: -0.049999997, y: -0.07952686, z: 0}
 --- !u!1 &8728411347317204359
 GameObject:
   m_ObjectHideFlags: 0
