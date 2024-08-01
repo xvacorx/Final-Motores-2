@@ -5,8 +5,8 @@ using UnityEngine;
 public class DogEnemy : Enemy
 {
     public float speed;
-    public float raycastLength = 1.0f; // Longitud del raycast
-    public LayerMask groundLayer; // Capa ground para el raycast
+    public float raycastLength = 1.0f;
+    public LayerMask groundLayer;
 
     public Transform sprite;
 
@@ -77,7 +77,6 @@ public class DogEnemy : Enemy
 
         animator.SetBool("isMoving", movement != Vector3.zero);
 
-        // Realiza el raycast y cambia de dirección si colisiona
         CheckForGroundCollision();
     }
 
@@ -99,7 +98,6 @@ public class DogEnemy : Enemy
 
         if (Physics.Raycast(transform.position, direction, raycastLength, groundLayer))
         {
-            // Cambia la dirección
             if (isMovingForw)
             {
                 isMovingForw = false;
@@ -115,7 +113,6 @@ public class DogEnemy : Enemy
 
     private void OnDrawGizmos()
     {
-        // Dibuja el raycast en la escena para depuración
         Gizmos.color = Color.red;
         Vector3 direction = isMovingForw ? transform.right : -transform.right;
         Gizmos.DrawRay(transform.position, direction * raycastLength);
