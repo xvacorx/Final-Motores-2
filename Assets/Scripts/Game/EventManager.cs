@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class EventManager
 {
@@ -25,5 +26,7 @@ public static class EventManager
     public static void TriggerPlayerDeath()
     {
         PlayerDeath?.Invoke();
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }

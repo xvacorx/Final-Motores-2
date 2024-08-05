@@ -10,8 +10,13 @@ public class PlayerStats : MonoBehaviour
     Animator animator;
     PlayerMovement movement;
 
-    public float health;
-    public float damage;
+    public TextMeshProUGUI healthTMP;
+
+    public int health;
+    public int damage;
+
+    private int currentHealth;
+    private int healthLevel;
     private void Awake()
     {
         if (Instance == null)
@@ -27,15 +32,18 @@ public class PlayerStats : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
         animator = GetComponentInChildren<Animator>();
+        UpdateHealthLevel();
+
     }
     public void JumpOnKill()
     {
         movement.JumpAboveEnemy();
     }
-    public void LoseLife(float amount)
+    public void LoseLife(int amount)
     {
         animator.SetTrigger("damage");
         health -= amount;
+        UpdateHealthLevel();
         if (health <= 0)
         {
             movement.enabled = false;
@@ -43,5 +51,14 @@ public class PlayerStats : MonoBehaviour
             animator.SetTrigger("death");
             Destroy(gameObject, 0.5f);
         }
+    }
+    private void OnDestroy()
+    {
+        EventManager.TriggerPlayerDeath();
+    }
+    void UpdateHealthLevel()
+    {
+        healthLevel = Mathf.Max(0, (health - currentHealth) / 25);
+        healthTMP.text = "lives: " + (healthLevel.ToString());
     }
 }

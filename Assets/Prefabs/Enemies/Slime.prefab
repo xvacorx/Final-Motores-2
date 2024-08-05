@@ -191,7 +191,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   health: 1
   hurting: 0
-  damage: 5
+  damage: 25
   firePoint: {fileID: 8463792556284078963}
   projectilePrefab: {fileID: 8920054247373260475, guid: 744e5977fd46a7d4293daf449e52c8c8,
     type: 3}
