@@ -17,6 +17,9 @@ public class PlayerStats : MonoBehaviour
 
     private int currentHealth;
     private int healthLevel;
+
+    private AudioSource damageAudio;
+    private AudioSource deathAudio;
     private void Awake()
     {
         if (Instance == null)
@@ -30,6 +33,8 @@ public class PlayerStats : MonoBehaviour
     }
     private void Start()
     {
+        damageAudio = GetComponent<AudioSource>();
+        deathAudio = GetComponent<AudioSource>();
         movement = GetComponent<PlayerMovement>();
         animator = GetComponentInChildren<Animator>();
         UpdateHealthLevel();
@@ -41,11 +46,13 @@ public class PlayerStats : MonoBehaviour
     }
     public void LoseLife(int amount)
     {
+        damageAudio.Play();
         animator.SetTrigger("damage");
         health -= amount;
         UpdateHealthLevel();
         if (health <= 0)
         {
+            deathAudio.Play();
             movement.enabled = false;
             Debug.Log("Player Death");
             animator.SetTrigger("death");
