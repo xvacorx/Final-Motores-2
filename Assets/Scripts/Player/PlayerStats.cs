@@ -57,11 +57,8 @@ public class PlayerStats : MonoBehaviour
             Debug.Log("Player Death");
             animator.SetTrigger("death");
             Destroy(gameObject, 0.5f);
+            EventManager.TriggerPlayerDeath();
         }
-    }
-    private void OnDestroy()
-    {
-        EventManager.TriggerPlayerDeath();
     }
     void UpdateHealthLevel()
     {
